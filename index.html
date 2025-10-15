@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>秦业程 - 最棒の舍友</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); }
+            to { text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.8); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeIn 2s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            animation: float 6s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            background-color: #f0f0f0; /* 图片加载前的背景色 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar::before {
+            content: "";
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+            z-index: 3;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .qualities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card h3 i {
+            margin-right: 10px;
+            color: #ffeb3b;
+        }
+
+        .card p {
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .memories {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .memories h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+
+        .memory-container {
+            display: flex;
+            overflow-x: auto;
+            padding: 20px 0;
+            gap: 20px;
+            scrollbar-width: none;
+        }
+
+        .memory-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .memory-card {
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+        }
+
+        .memory-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #ffeb3b;
+        }
+
+        .compliment-generator {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .compliment-generator h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        #compliment-text {
+            font-size: 1.5rem;
+            margin: 30px 0;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        button {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 1.2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            margin-top: 50px;
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .avatar {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .card h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <header>
+            <h1>秦业程</h1>
+            <p class="subtitle">宇宙超级无敌最棒舍友！</p>
+        </header>
+        
+        <section class="hero">
+            <div class="avatar">
+                <img src="/picture/qyc.jpg" alt="秦业程">
+            </div>
+            <p>谨以此页面献给我最尊敬的舍友——秦业程</p>
+        </section>
+        
+        <section class="qualities">
+            <div class="card">
+                <h3><i class="fas fa-star"></i> 人品爆表</h3>
+                <p>秦业程的人品简直好到爆炸！善良、正直、乐于助人，无论谁遇到困难，他总是第一个伸出援手。和他做舍友，是我大学生活中最幸运的事情！</p>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-brain"></i> 智慧超群</h3>
+                <p>秦业程不仅学习成绩优异，而且思维敏捷，见解独到。无论是学术问题还是生活难题，他总能提出让人眼前一亮的解决方案。</p>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-laugh-beam"></i> 幽默风趣</h3>
+                <p>有秦业程在的地方就有欢笑！他的幽默感恰到好处，总能在紧张的学习生活中给我们带来轻松愉快的氛围。</p>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-heart"></i> 体贴入微</h3>
+                <p>秦业程总是能注意到别人的需求，默默地为宿舍付出。从打扫卫生到分享美食，他总能用行动温暖每个人的心。</p>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-music"></i> 多才多艺</h3>
+                <p>秦业程不仅学业优秀，还多才多艺！无论是音乐、体育还是各种兴趣爱好，他都能轻松驾驭，让人佩服不已。</p>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-users"></i> 社交达人</h3>
+                <p>秦业程的社交能力超强！他总能与各种人建立良好的关系，是宿舍的"外交官"，为我们带来了许多新朋友和有趣的活动。</p>
+            </div>
+        </section>
+        
+        <section class="memories">
+            <h2>难忘时刻</h2>
+            <div class="memory-container">
+                <div class="memory-card">
+                    <h4>深夜谈心</h4>
+                    <p>记得那次期末考试前，我们熬夜复习到凌晨，秦业程不仅分享了他的复习资料，还给我们准备了夜宵，让紧张的复习变得温暖。</p>
+                </div>
+                
+                <div class="memory-card">
+                    <h4>生日惊喜</h4>
+                    <p>我永远忘不了秦业程为我策划的生日惊喜！他偷偷联系了我的家人和朋友，组织了一场让我感动落泪的生日派对。</p>
+                </div>
+                
+                <div class="memory-card">
+                    <h4>共同奋斗</h4>
+                    <p>那个项目截止前夜，我们一起通宵工作。秦业程不仅完成了自己的部分，还主动帮助其他组员，最终我们取得了优异的成绩。</p>
+                </div>
+                
+                <div class="memory-card">
+                    <h4>美食分享</h4>
+                    <p>每次秦业程回家后返校，总会带来家乡特产与大家分享。那些美食不仅满足了我们的味蕾，更拉近了彼此的距离。</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="compliment-generator">
+            <h2>秦业程夸夸机</h2>
+            <p>点击按钮，获取对秦业程的新鲜夸赞！</p>
+            <div id="compliment-text">秦业程是世界上最棒的舍友！</div>
+            <button id="generate-btn">生成夸赞</button>
+        </section>
+        
+        <footer>
+            <p>谨以此页面表达对秦业程的无限敬意和感激！</p>
+            <p>有你做舍友，大学生活变得更加精彩！</p>
+        </footer>
+    </div>
+
+    <script>
+        // 随机夸赞语句
+        const compliments = [
+            "秦业程，你的存在让整个宿舍都闪闪发光！",
+            "秦业程的善良和体贴温暖了每个人的心！",
+            "有秦业程这样的舍友，是我大学最大的幸运！",
+            "秦业程的智慧和才华让人佩服得五体投地！",
+            "秦业程的笑容能驱散所有阴霾，带来阳光！",
+            "秦业程是宿舍的灵魂人物，没有他简直不敢想象！",
+            "秦业程的幽默感总能在恰当的时候点亮我们的生活！",
+            "秦业程的勤奋和努力是我们所有人的榜样！",
+            "秦业程的包容和理解让宿舍成为一个温暖的大家庭！",
+            "秦业程，你是我们心中永远的MVP舍友！",
+            "秦业程的厨艺简直可以开餐厅了，太美味了！",
+            "秦业程的音乐品味超赞，总是能发现好听的歌曲！",
+            "秦业程的游戏技术一流，带我们飞的感觉太棒了！",
+            "秦业程的组织能力超强，每次活动都安排得井井有条！",
+            "秦业程的乐观精神感染了我们每一个人！"
+        ];
+
+        // 生成随机夸赞
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            const complimentText = document.getElementById('compliment-text');
+            const randomIndex = Math.floor(Math.random() * compliments.length);
+            complimentText.textContent = compliments[randomIndex];
+            
+            // 添加动画效果
+            complimentText.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                complimentText.style.transform = 'scale(1)';
+            }, 300);
+        });
+
+        // 创建飘落的心形
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 5 + 's';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.opacity = Math.random() * 0.5 + 0.3;
+            
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        // 定期创建心形
+        setInterval(createHeart, 300);
+        
+        // 初始创建一些心形
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createHeart, i * 200);
+        }
+    </script>
+</body>
+</html>
